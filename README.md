@@ -1,3 +1,104 @@
+##options:
+  -h, --help            show this help message and exit
+  --dataroot DATAROOT   path to images (should have subfolders trainA, trainB, valA, valB, etc)
+                        (default: None)
+  --batch_size BATCH_SIZE
+                        input batch size (default: 1)
+  --loadSize LOADSIZE   scale images to this size (default: 286)
+  --fineSize FINESIZE   then crop to this size (default: 256)
+  --display_winsize DISPLAY_WINSIZE
+                        display window size for both visdom and HTML (default: 256)
+  --input_nc INPUT_NC   # of input image channels (default: 3)
+  --output_nc OUTPUT_NC
+                        # of output image channels (default: 3)
+  --ngf NGF             # of gen filters in first conv layer (default: 64)
+  --ndf NDF             # of discrim filters in first conv layer (default: 64)
+  --netD NETD           selects model to use for netD (default: basic)
+  --netG NETG           selects model to use for netG (default: resnet_9blocks)
+  --n_layers_D N_LAYERS_D
+                        only used if netD==n_layers (default: 3)
+  --gpu_ids GPU_IDS     gpu ids: e.g. 0 0,1,2, 0,2. use -1 for CPU (default: 0)
+  --name NAME           name of the experiment. It decides where to store samples and models
+                        (default: experiment_name)
+  --dataset_mode DATASET_MODE
+                        chooses how datasets are loaded. [unaligned | aligned | single] (default:
+                        unaligned)
+  --model MODEL         chooses which model to use. cycle_gan, pix2pix, test (default: cycle_gan)
+  --direction DIRECTION
+                        AtoB or BtoA (default: AtoB)
+  --epoch EPOCH         which epoch to load? set to latest to use latest cached model (default:
+                        latest)
+  --num_threads NUM_THREADS
+                        # threads for loading data (default: 4)
+  --checkpoints_dir CHECKPOINTS_DIR
+                        models are saved here (default: ./checkpoints)
+  --norm NORM           instance normalization or batch normalization (default: instance)
+  --serial_batches      if true, takes images in order to make batches, otherwise takes them
+                        randomly (default: False)
+  --no_dropout          no dropout for the generator (default: False)
+  --max_dataset_size MAX_DATASET_SIZE
+                        Maximum number of samples allowed per dataset. If the dataset directory
+                        contains more than max_dataset_size, only a subset is loaded. (default:
+                        inf)
+  --resize_or_crop RESIZE_OR_CROP
+                        scaling and cropping of images at load time
+                        [resize_and_crop|crop|scale_width|scale_width_and_crop|none] (default:
+                        resize_and_crop)
+  --no_flip             if specified, do not flip the images for data augmentation (default:
+                        False)
+  --init_type INIT_TYPE
+                        network initialization [normal|xavier|kaiming|orthogonal] (default:
+                        normal)
+  --init_gain INIT_GAIN
+                        scaling factor for normal, xavier and orthogonal. (default: 0.02)
+  --verbose             if specified, print more debugging information (default: False)
+  --suffix SUFFIX       customized suffix: opt.name = opt.name + suffix: e.g.,
+                        {model}_{netG}_size{loadSize} (default: )
+  --display_freq DISPLAY_FREQ
+                        frequency of showing training results on screen (default: 400)
+  --display_ncols DISPLAY_NCOLS
+                        if positive, display all images in a single visdom web panel with certain
+                        number of images per row. (default: 4)
+  --display_id DISPLAY_ID
+                        window id of the web display (default: 1)
+  --display_server DISPLAY_SERVER
+                        visdom server of the web display (default: http://localhost)
+  --display_env DISPLAY_ENV
+                        visdom display environment name (default is "main") (default: main)
+  --display_port DISPLAY_PORT
+                        visdom port of the web display (default: 8097)
+  --update_html_freq UPDATE_HTML_FREQ
+                        frequency of saving training results to html (default: 1000)
+  --print_freq PRINT_FREQ
+                        frequency of showing training results on console (default: 100)
+  --save_latest_freq SAVE_LATEST_FREQ
+                        frequency of saving the latest results (default: 5000)
+  --save_epoch_freq SAVE_EPOCH_FREQ
+                        frequency of saving checkpoints at the end of epochs (default: 5)
+  --continue_train      continue training: load the latest model (default: False)
+  --epoch_count EPOCH_COUNT
+                        the starting epoch count, we save the model by <epoch_count>,
+                        <epoch_count>+<save_latest_freq>, ... (default: 1)
+  --phase PHASE         train, val, test, etc (default: train)
+  --niter NITER         # of iter at starting learning rate (default: 100)
+  --niter_decay NITER_DECAY
+                        # of iter to linearly decay learning rate to zero (default: 100)
+  --beta1 BETA1         momentum term of adam (default: 0.5)
+  --lr LR               initial learning rate for adam (default: 0.0002)
+  --no_lsgan            do *not* use least square GAN, if false, use vanilla GAN (default: False)
+  --pool_size POOL_SIZE
+                        the size of image buffer that stores previously generated images (default:
+                        50)
+  --no_html             do not save intermediate training results to
+                        [opt.checkpoints_dir]/[opt.name]/web/ (default: False)
+  --lr_policy LR_POLICY
+                        learning rate policy: lambda|step|plateau|cosine (default: lambda)
+  --lr_decay_iters LR_DECAY_ITERS
+                        multiply by a gamma every lr_decay_iters iterations (default: 50)
+
+
+
+
 # Manga colorization
 
 For me, the Artificial Intelligence is like a passion and I am trying to use it to solve some daily life problems. In this tutorial/project, I want to give some intuitions to the readers about how deep learning is actually working. In this tutorial, we will talk about a class of deep learning algorithms called "Generative Adversarial Network". This category of networks is relatively new and the logic behind it often misunderstood. 
