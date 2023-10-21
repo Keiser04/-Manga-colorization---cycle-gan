@@ -1,6 +1,7 @@
-#options:
   -h, --help            show this help message and exit
+
   --dataroot DATAROOT   path to images (should have subfolders trainA, trainB, valA, valB, etc)
+  
                         (default: None)
   --batch_size BATCH_SIZE
                         input batch size (default: 1)
@@ -95,8 +96,6 @@
                         learning rate policy: lambda|step|plateau|cosine (default: lambda)
   --lr_decay_iters LR_DECAY_ITERS
                         multiply by a gamma every lr_decay_iters iterations (default: 50)
-
-
 
 
 # Manga colorization
