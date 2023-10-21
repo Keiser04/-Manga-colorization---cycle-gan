@@ -5,13 +5,12 @@ import ntpath
 import time
 from . import util
 from . import html
-from scipy.misc import imresize
+from skimage.transform import resize as imresize
 
 if sys.version_info[0] == 2:
     VisdomExceptionBase = Exception
 else:
     VisdomExceptionBase = ConnectionError
-
 
 # save image to the disk
 def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
@@ -28,16 +27,15 @@ def save_images(webpage, visuals, image_path, aspect_ratio=1.0, width=256):
         save_path = os.path.join(image_dir, image_name)
         h, w, _ = im.shape
         if aspect_ratio > 1.0:
-            im = imresize(im, (h, int(w * aspect_ratio)), interp='bicubic')
+            im = imresize(im, (h, int(w * aspect_ratio)), mode='reflect')
         if aspect_ratio < 1.0:
-            im = imresize(im, (int(h / aspect_ratio), w), interp='bicubic')
+            im = imresize(im, (int(h / aspect_ratio), w), mode='reflect')
         util.save_image(im, save_path)
 
         ims.append(image_name)
         txts.append(label)
         links.append(image_name)
     webpage.add_images(ims, txts, links, width=width)
-
 
 class Visualizer():
     def __init__(self, opt):
@@ -118,13 +116,13 @@ class Visualizer():
                                    win=self.display_id + idx)
                     idx += 1
 
-        if self.use_html and (save_result or not self.saved):  # save images to a html file
+        if self.use_html and (save_result or not self.saved):  # save images to an HTML file
             self.saved = True
             for label, image in visuals.items():
                 image_numpy = util.tensor2im(image)
                 img_path = os.path.join(self.img_dir, 'epoch%.3d_%s.png' % (epoch, label))
                 util.save_image(image_numpy, img_path)
-            # update website
+            # update the website
             webpage = html.HTML(self.web_dir, 'Experiment name = %s' % self.name, reflesh=1)
             for n in range(epoch, 0, -1):
                 webpage.add_header('epoch [%d]' % n)
