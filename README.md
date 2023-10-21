@@ -1,4 +1,4 @@
-##options:
+#options:
   -h, --help            show this help message and exit
   --dataroot DATAROOT   path to images (should have subfolders trainA, trainB, valA, valB, etc)
                         (default: None)
